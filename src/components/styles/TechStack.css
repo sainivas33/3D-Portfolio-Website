@@ -1,0 +1,213 @@
+/* Glassmorphism TechStack styles */
+.techstack-section {
+  padding: 70px 0 72px;
+  color: #e7edf7;
+  position: relative;
+}
+
+.techstack-intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 34px;
+}
+
+.techstack-intro h2 {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.05;
+  background: linear-gradient(90deg, #4f46e5, #8b5cf6, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.techstack-intro p {
+  margin: 16px auto 0;
+  max-width: 520px;
+  color: rgba(226, 232, 240, 0.75);
+  font-size: 0.96rem;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.category-card {
+  background: rgba(20, 25, 45, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 28px 24px;
+  box-shadow: 0 18px 50px rgba(5, 10, 25, 0.42);
+  backdrop-filter: blur(16px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79, 70, 229, 0.45);
+  box-shadow: 0 22px 64px rgba(79, 70, 229, 0.18);
+}
+
+.category-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #c7d2fe;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.tech-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  min-height: 90px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(79, 70, 229, 0.16);
+  border-color: rgba(79, 70, 229, 0.28);
+  background: rgba(79, 70, 229, 0.02);
+}
+
+.tech-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.tech-card-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.tech-card span {
+  font-size: 0.75rem;
+  color: #e2e8f0;
+}
+
+.learning-card {
+  margin-top: 32px;
+  background: rgba(20, 25, 45, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 26px 24px;
+  box-shadow: 0 18px 50px rgba(5, 10, 25, 0.42);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.learning-card-header {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #5b6cf6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+.tech-card.learning {
+  min-height: 90px;
+  padding: 12px 8px;
+}
+
+.techstack-tagline {
+  margin-top: 28px;
+  margin-bottom: 34px;
+  text-align: center;
+  color: rgba(226, 232, 240, 0.72);
+  font-size: 0.95rem;
+}
+.tagline-cyan {
+  color: #0ea5e9;
+}
+
+.tagline-purple {
+  color: #8b5cf6;
+}
+
+@media only screen and (max-width: 1120px) {
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .learning-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .techstack-section {
+    padding: 56px 0 24px;
+  }
+
+  .techstack-intro {
+    margin-bottom: 24px;
+  }
+
+  .category-grid,
+  .learning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    padding: 20px;
+  }
+
+  .tech-card {
+    min-height: 100px;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

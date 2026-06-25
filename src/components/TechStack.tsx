@@ -1,213 +1,160 @@
-import * as THREE from "three";
-import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
-import {
-  BallCollider,
-  Physics,
-  RigidBody,
-  CylinderCollider,
-  RapierRigidBody,
-} from "@react-three/rapier";
+import React, { useEffect, useRef } from "react";
+import "./styles/TechStack.css";
 
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+const placeholder = "/images/placeholder.webp";
+
+const mainCategories = [
+  {
+    title: "Languages",
+    icon: "&lt;/&gt;",
+    items: [
+      { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
+      { name: "SQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
+      { name: "Java", icon: "https://cdn.simpleicons.org/java/007396" },
+    ],
+  },
+  {
+    title: "Data Engineering",
+    icon: "📁",
+    items: [
+      { name: "Apache Kafka", icon: "https://cdn.simpleicons.org/kafka/231F20" },
+      { name: "Apache Airflow", icon: "https://cdn.simpleicons.org/apacheairflow/017CEE" },
+      { name: "Apache Spark", icon: "https://cdn.simpleicons.org/apachespark/E25A1C" },
+      { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/150458" },
+      { name: "NumPy", icon: "https://cdn.simpleicons.org/numpy/013243" },
+    ],
+  },
+  {
+    title: "Cloud & AWS",
+    icon: "☁️",
+    items: [
+      { name: "Amazon S3", icon: "https://cdn.simpleicons.org/amazons3/569a31" },
+      { name: "AWS Glue", icon: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+      { name: "AWS Lambda", icon: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+      { name: "Amazon Athena", icon: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+      { name: "Amazon Redshift", icon: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+      { name: "Amazon QuickSight", icon: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+    ],
+  },
+  {
+    title: "Databases",
+    icon: "💾",
+    items: [
+      { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/336791" },
+      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
+    ],
+  },
+  {
+    title: "Backend",
+    icon: "⚙️",
+    items: [
+      { name: "FastAPI", icon: "https://cdn.simpleicons.org/fastapi/009688" },
+      { name: "Flask", icon: "https://cdn.simpleicons.org/flask/FEF7DF" },
+      { name: "REST APIs", icon: "https://cdn.simpleicons.org/swagger/85EA2D" },
+    ],
+  },
+  {
+    title: "DevOps & Tools",
+    icon: "🛠️",
+    items: [
+      { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
+      { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
+      { name: "GitHub", icon: "https://cdn.simpleicons.org/github/181717" },
+      { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
+      { name: "VS Code", icon: "https://cdn.simpleicons.org/visualstudiocode/007ACC" },
+    ],
+  },
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
-
-const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
-}));
-
-type SphereProps = {
-  vec?: THREE.Vector3;
-  scale: number;
-  r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
-  isActive: boolean;
+const learningCategory = {
+  title: "CURRENTLY LEARNING",
+  items: [
+    { name: "Kubernetes", icon: "https://cdn.simpleicons.org/kubernetes/326CE5" },
+    { name: "Terraform", icon: "https://cdn.simpleicons.org/terraform/7B42BC" },
+    { name: "dbt", icon: "https://cdn.simpleicons.org/dbt/FF694B" },
+  ],
 };
 
-function SphereGeo({
-  vec = new THREE.Vector3(),
-  scale,
-  r = THREE.MathUtils.randFloatSpread,
-  material,
-  isActive,
-}: SphereProps) {
-  const api = useRef<RapierRigidBody | null>(null);
-
-  useFrame((_state, delta) => {
-    if (!isActive) return;
-    delta = Math.min(0.1, delta);
-    const impulse = vec
-      .copy(api.current!.translation())
-      .normalize()
-      .multiply(
-        new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
-        )
-      );
-
-    api.current?.applyImpulse(impulse, true);
-  });
-
-  return (
-    <RigidBody
-      linearDamping={0.75}
-      angularDamping={0.15}
-      friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
-      ref={api}
-      colliders={false}
-    >
-      <BallCollider args={[scale]} />
-      <CylinderCollider
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, 0, 1.2 * scale]}
-        args={[0.15 * scale, 0.275 * scale]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-        rotation={[0.3, 1, 1]}
-      />
-    </RigidBody>
-  );
-}
-
-type PointerProps = {
-  vec?: THREE.Vector3;
-  isActive: boolean;
-};
-
-function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
-  const ref = useRef<RapierRigidBody>(null);
-
-  useFrame(({ pointer, viewport }) => {
-    if (!isActive) return;
-    const targetVec = vec.lerp(
-      new THREE.Vector3(
-        (pointer.x * viewport.width) / 2,
-        (pointer.y * viewport.height) / 2,
-        0
-      ),
-      0.2
-    );
-    ref.current?.setNextKinematicTranslation(targetVec);
-  });
-
-  return (
-    <RigidBody
-      position={[100, 100, 100]}
-      type="kinematicPosition"
-      colliders={false}
-      ref={ref}
-    >
-      <BallCollider args={[2]} />
-    </RigidBody>
-  );
-}
-
-const TechStack = () => {
-  const [isActive, setIsActive] = useState(false);
+const TechStack: React.FC = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
+    const root = ref.current;
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const fadeElements = Array.from(root.querySelectorAll(".fade-in"));
+            if (root.classList.contains("fade-in")) {
+              fadeElements.unshift(root);
+            }
+            fadeElements.forEach((el) => el.classList.add("visible"));
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.12 }
     );
+
+    observer.observe(root);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
+    <section className="techstack-section fade-in" id="techstack" ref={ref}>
+      <div className="techstack-intro">
+        <h2>MY TECH STACK</h2>
+        <p>Technologies I work with</p>
+      </div>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
-            />
+      <div className="category-grid fade-in">
+        {mainCategories.map((category) => (
+          <div className="category-card" key={category.title}>
+            <h3><span className="category-icon">{category.icon}</span> {category.title}</h3>
+            <div className="tech-grid">
+              {category.items.map((item) => (
+                <div className="tech-card" key={item.name}>
+                  <div className="tech-card-icon">
+                    <img
+                      src={item.icon}
+                      alt={item.name}
+                      loading="lazy"
+                      onError={(e) => ((e.currentTarget as HTMLImageElement).src = placeholder)}
+                    />
+                  </div>
+                  <span>{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="learning-card fade-in">
+        <div className="learning-card-header">
+          <span>CURRENTLY LEARNING</span>
+        </div>
+        <div className="learning-grid">
+          {learningCategory.items.map((item) => (
+            <div className="tech-card learning" key={item.name}>
+              <div className="tech-card-icon">
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  loading="lazy"
+                  onError={(e) => ((e.currentTarget as HTMLImageElement).src = placeholder)}
+                />
+              </div>
+              <span>{item.name}</span>
+            </div>
           ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
-    </div>
+        </div>
+      </div>
+
+      <p className="techstack-tagline">&lt;/&gt; Always <span className="tagline-cyan">learning</span>. Always <span className="tagline-purple">building</span>. Always <span className="tagline-cyan">improving</span>.</p>
+    </section>
   );
 };
 

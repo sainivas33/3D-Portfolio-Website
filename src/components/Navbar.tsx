@@ -35,24 +35,30 @@ const Navbar = () => {
         }
       });
     });
-    window.addEventListener("resize", () => {
+
+    const resizeHandler = () => {
       ScrollSmoother.refresh(true);
-    });
+    };
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
   }, []);
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          SH
+          SN
         </a>
         <a
-          href="https://www.linkedin.com/in/shriyash-soni/"
+          href="https://www.linkedin.com/in/sainivas-katika-27021332a/"
           className="navbar-connect"
           data-cursor="disable"
           target="_blank"
           rel="noreferrer"
         >
-          linkedin.com/in/shriyash-soni
+          linkedin.com/in/sainivas-katika
         </a>
         <ul>
           <li>

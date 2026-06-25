@@ -11,49 +11,62 @@ import HoverLinks from "./HoverLinks";
 
 const SocialIcons = () => {
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const social = document.getElementById("social");
+    if (!social) return;
 
-    social.querySelectorAll("span").forEach((item) => {
-      const elem = item as HTMLElement;
-      const link = elem.querySelector("a") as HTMLElement;
+    const iconItems = Array.from(social.querySelectorAll("span")).map(
+      (item) => {
+        const elem = item as HTMLElement;
+        const link = elem.querySelector("a") as HTMLElement;
+        const rect = elem.getBoundingClientRect();
 
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
-      let currentX = 0;
-      let currentY = 0;
+        return {
+          elem,
+          link,
+          rect,
+          mouseX: rect.width / 2,
+          mouseY: rect.height / 2,
+          currentX: 0,
+          currentY: 0,
+        };
+      }
+    );
 
-      const updatePosition = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
+    const updatePosition = () => {
+      iconItems.forEach((item) => {
+        item.currentX += (item.mouseX - item.currentX) * 0.1;
+        item.currentY += (item.mouseY - item.currentY) * 0.1;
 
-        link.style.setProperty("--siLeft", `${currentX}px`);
-        link.style.setProperty("--siTop", `${currentY}px`);
+        item.link.style.setProperty("--siLeft", `${item.currentX}px`);
+        item.link.style.setProperty("--siTop", `${item.currentY}px`);
+      });
+      animationFrameId = requestAnimationFrame(updatePosition);
+    };
 
-        requestAnimationFrame(updatePosition);
-      };
+    let animationFrameId = requestAnimationFrame(updatePosition);
 
-      const onMouseMove = (e: MouseEvent) => {
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    const onMouseMove = (e: MouseEvent) => {
+      iconItems.forEach((item) => {
+        item.rect = item.elem.getBoundingClientRect();
+        const x = e.clientX - item.rect.left;
+        const y = e.clientY - item.rect.top;
 
         if (x < 40 && x > 10 && y < 40 && y > 5) {
-          mouseX = x;
-          mouseY = y;
+          item.mouseX = x;
+          item.mouseY = y;
         } else {
-          mouseX = rect.width / 2;
-          mouseY = rect.height / 2;
+          item.mouseX = item.rect.width / 2;
+          item.mouseY = item.rect.height / 2;
         }
-      };
+      });
+    };
 
-      document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mousemove", onMouseMove);
 
-      updatePosition();
-
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
-      };
-    });
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
@@ -61,7 +74,7 @@ const SocialIcons = () => {
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
           <a
-            href="https://github.com/shriyashsoni"
+            href="https://github.com/sainivas33"
             target="_blank"
             rel="noreferrer"
           >
@@ -70,7 +83,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://www.linkedin.com/in/shriyash-soni/"
+            href="https://www.linkedin.com/in/sainivas-katika-27021332a/"
             target="_blank"
             rel="noreferrer"
           >
@@ -79,7 +92,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://x.com/shriyash_soni?t=8Mh_W6fG5hfabPzJNTW3lg&s=09"
+            href="https://x.com/TheSaiForward"
             target="_blank"
             rel="noreferrer"
           >
@@ -88,7 +101,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://www.instagram.com/sonishriyash"
+            href="https://www.instagram.com/sainivas____?igsh=MWpuMGN4dHl0Y2I2Yw=="
             target="_blank"
             rel="noreferrer"
           >
@@ -98,7 +111,7 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href="https://docs.google.com/document/d/1hJ0nIT3kFQxdgz8yU4UM5SZJBg_zXbBf/edit?usp=sharing&ouid=105672584541014886580&rtpof=true&sd=true"
+        href="https://drive.google.com/file/d/1-Vsbm7CjwLZL-MTpb39PFiuq-TUYrpT3/view?usp=drivesdk"
         target="_blank"
         rel="noreferrer"
       >

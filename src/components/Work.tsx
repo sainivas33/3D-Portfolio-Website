@@ -5,37 +5,33 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "FlowOS",
-    category: "DeFi Financial OS",
-    tools: "Flow Blockchain, Web3, Decentralized Finance",
-    image: "/images/flowos.png",
-    link: "https://flow-os-08fw.onrender.com/",
-    github: "https://github.com/shriyashsoni/flow-os"
+    title: "Stock Market Data Pipeline",
+    category: "Data Engineering",
+    tools: "Python, SQL, Kafka, AWS S3, Glue, Athena",
+    image: "/images/stockmarket.png",
+    link: "https://github.com/sainivas33/real-time-stock-market-data-pipeline/tree/main/stock-market-kafka-data-engineering-project-main/stock-market-kafka-data-engineering-project-main",
   },
   {
-    title: "Defaiance",
-    category: "Decentralized Investment Platform",
-    tools: "Web3 Technologies, DeFi Infrastructure, AI-Driven Analytics",
-    image: "/images/defaiance.png",
-    link: "https://defaiance-2iqs.vercel.app/",
-    github: "https://github.com/shriyashsoni/defaiance"
+    title: "End-to-End ETL Pipelines",
+    category: "Data Engineering",
+    tools: "Python, SQL, Apache Airflow, AWS Lambda, S3, PostgreSQL, Docker",
+    image: "/images/etlpipeline.png",
+    link: "",
   },
   {
-    title: "YieldMind",
-    category: "AI-Powered DeFi Platform on Polygon",
-    tools: "Polygon Amoy, Smart Contracts, Risk-Aware Automation",
-    image: "/images/yieldmind.png",
-    link: "https://yieldmind.vercel.app/",
-    github: "https://github.com/shriyashsoni/yield-mind-on-polygon"
+    title: "Real-Time Uber Data Analytics Pipeline",
+    category: "Data Engineering",
+    tools: "Python, SQL, Kafka, AWS S3, Glue, Athena, Apache Spark, Glue, Redshift",
+    image: "/images/uber.png",
+    link: "",
   },
   {
-    title: "Aleo Confidential AI",
-    category: "Decentralized AI Marketplace",
-    tools: "Aleo Blockchain, Confidential Inference, Data Trading",
-    image: "/images/aleo.png",
-    link: "https://aura-protocol-seven.vercel.app/",
-    github: "https://github.com/shriyashsoni/Aura-Protocol"
-  }
+    title: "YouTube Analytics Data Pipeline",
+    category: "Data Engineer",
+    tools: "Python, YouTube API, AWS Lambda, S3, Glue, Athena, QuickSight",
+    image: "/images/youtube.png",
+    link: "",
+  },
 ];
 
 const Work = () => {
@@ -53,14 +49,12 @@ const Work = () => {
   );
 
   const goToPrev = useCallback(() => {
-    const newIndex =
-      currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+    const newIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
     goToSlide(newIndex);
   }, [currentIndex, goToSlide]);
 
   const goToNext = useCallback(() => {
-    const newIndex =
-      currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
+    const newIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
     goToSlide(newIndex);
   }, [currentIndex, goToSlide]);
 
@@ -72,7 +66,6 @@ const Work = () => {
         </h2>
 
         <div className="carousel-wrapper">
-          {/* Navigation Arrows */}
           <button
             className="carousel-arrow carousel-arrow-left"
             onClick={goToPrev}
@@ -90,38 +83,33 @@ const Work = () => {
             <MdArrowForward />
           </button>
 
-          {/* Slides */}
           <div className="carousel-track-container">
             <div
               className="carousel-track"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-              }}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {projects.map((project, index) => (
                 <div className="carousel-slide" key={index}>
-                  <div className="carousel-content">
-                    <div className="carousel-info">
+                  <div className="carousel-card">
+                    <div className="carousel-card-left">
                       <div className="carousel-number">
                         <h3>0{index + 1}</h3>
                       </div>
                       <div className="carousel-details">
                         <h4>{project.title}</h4>
-                        <p className="carousel-category">
-                          {project.category}
-                        </p>
+                        <p className="carousel-category">{project.category}</p>
                         <div className="carousel-tools">
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
                         </div>
                       </div>
                     </div>
-                    <div className="carousel-image-wrapper">
+
+                    <div className="carousel-card-right">
                       <WorkImage
                         image={project.image}
                         alt={project.title}
                         link={project.link}
-                        github={project.github}
                       />
                     </div>
                   </div>
@@ -130,13 +118,11 @@ const Work = () => {
             </div>
           </div>
 
-          {/* Dot Indicators */}
           <div className="carousel-dots">
             {projects.map((_, index) => (
               <button
                 key={index}
-                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""
-                  }`}
+                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""}`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to project ${index + 1}`}
                 data-cursor="disable"

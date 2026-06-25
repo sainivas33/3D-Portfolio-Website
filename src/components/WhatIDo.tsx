@@ -8,19 +8,22 @@ const WhatIDo = () => {
     containerRef.current[index] = el;
   };
   useEffect(() => {
+    const clickHandlers: Array<{ container: HTMLDivElement; handler: () => void }> = [];
+
     if (ScrollTrigger.isTouch) {
       containerRef.current.forEach((container) => {
         if (container) {
+          const clickHandler = () => handleClick(container);
           container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
+          container.addEventListener("click", clickHandler);
+          clickHandlers.push({ container, handler: clickHandler });
         }
       });
     }
+
     return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => handleClick(container));
-        }
+      clickHandlers.forEach(({ container, handler }) => {
+        container.removeEventListener("click", handler);
       });
     };
   }, []);
@@ -87,19 +90,19 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>AI &amp; MACHINE LEARNING</h3>
-              <h4>Intelligent Systems &amp; Tooling</h4>
+              <h3>DATA ENGINEERING</h3>
+              <h4>Data Pipelines &amp; Analytics</h4>
               <p>
-                AI specialist developing predictive models and NLP solutions—from ATS resume analyzers to EdTech recommendation engines.
+                Building ETL pipelines, processing large datasets, and developing scalable data workflows using Python, SQL, Kafka, and cloud technologies.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">LLMs &amp; Agents</div>
-                <div className="what-tags">Fast API</div>
-                <div className="what-tags">scikit-learn</div>
-                <div className="what-tags">spaCy</div>
-                <div className="what-tags">NLTK</div>
-                <div className="what-tags">Prompt Engineering</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">SQL</div>
+                <div className="what-tags">Kafka</div>
+                <div className="what-tags">Spark</div>
+                <div className="what-tags">ETL</div>
+                <div className="what-tags">AWS</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -123,19 +126,19 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>WEB3 &amp; BLOCKCHAIN</h3>
-              <h4>Decentralized Applications &amp; Protocols</h4>
+              <h3>CLOUD &amp; DEVOPS</h3>
+              <h4>Deployment &amp; Automation</h4>
               <p>
-                Building permissionless ecosystems and scalable dApps. Developing automated DeFi yield optimizers and trustless protocols on Polygon, Solana, Flow, and Ethereum.
+                Working with AWS, Docker, Git, CI/CD pipelines, and modern cloud infrastructure to deploy and manage applications.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Smart Contracts</div>
-                <div className="what-tags">Decentralized Finance</div>
-                <div className="what-tags">Web3.js</div>
-                <div className="what-tags">Ethers.js</div>
-                <div className="what-tags">Solidity</div>
-                <div className="what-tags">Move</div>
+                <div className="what-tags">AWS</div>
+                <div className="what-tags">Docker</div>
+                <div className="what-tags">Linux</div>
+                <div className="what-tags">GitHub Actions</div>
+                <div className="what-tags">CI/CD</div>
+                <div className="what-tags">Terraform</div>
               </div>
               <div className="what-arrow"></div>
             </div>

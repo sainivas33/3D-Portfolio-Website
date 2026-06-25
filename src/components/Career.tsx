@@ -15,43 +15,42 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Founder</h4>
-                <h5><a href="https://www.apnacounsellor.in" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>Apna Counsellor ↗</a></h5>
+                <h4>Data Engineering Intern</h4>
+                <h5><a href="https://www.ey.com" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>EY ↗</a></h5>
               </div>
-              <h3>2024–NOW</h3>
+              <h3>Jan–April 2026</h3>
             </div>
-            <p>
-              AI-driven EdTech platform for student career counseling and university admissions. Democratized guidance making it affordable (₹250-₹1000), assisting 6,000+ students in 2 years.
+            <p>Worked on data processing, SQL-based analysis, and workflow automation. Assisted in data transformation, reporting, and quality validation while gaining exposure to cloud technologies, data pipelines, Git, and enterprise engineering practices.
               <br/><br/>
-              <span style={{color: '#ffd700'}}>Highlights:</span> Represented at MIT Start 2026, IIT Bombay Finalist, Vibecon (by Y Combinator & Emergent).
+              <span style={{color: '#ffd700'}}>Highlights:</span>  SQL & Python data processing, ETL & data validation, workflow automation, Git & cloud exposure, and enterprise engineering practices.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Founder</h4>
-                <h5><a href="https://apnacoding.site" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'none'}}>Apna Coding ↗</a></h5>
+                <h4>Andhra University</h4>
+                <h5><a href="" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'none'}}></a></h5>
               </div>
-              <h3>2024–NOW</h3>
+              <h3>2020–2023</h3>
             </div>
             <p>
-              Web3 open-source layer and Ethereum launchpad securing funds & mentorship for ecosystem projects. Built a global community of 20,000+ developers across India, Dubai, London, and the USA.
+              Bachelor of Science in Computer Science
               <br/><br/>
-              <span style={{color: '#ffd700'}}>Highlights:</span> 50+ Web3 partnerships. Represented at Dubai Function One, India Blockchain Week, and ETH Denver USA.
+              <span style={{color: '#ffd700'}}>Highlights:</span> Strong foundation in Computer Science, SQL, DBMS, Data Structures, Algorithms, and Software Development. Applied concepts through academic projects and hands-on learning.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Founder</h4>
-                <h5>Brixs</h5>
+                <h4>Personal Projects</h4>
+                <h5></h5>
               </div>
-              <h3>2025–NOW</h3>
+              <h3>2023–NOW</h3>
             </div>
             <p>
-              Web3 AI Agent platform for generating, auditing, and securely deploying smart contracts on-chain. Integrates leading models (Claude, OpenAI, Gemini) to automate Web3 security workflows.
+              Built hands-on projects in Data Engineering, Backend Development, and Web Development using Python, SQL, Kafka, AWS, React, and TypeScript.
               <br/><br/>
-              <span style={{color: '#ffd700'}}>Highlights:</span> Secured 10-20+ ecosystem partnerships. Targeting full platform launch in late 2026.
+              <span style={{color: '#ffd700'}}>Highlights:</span> Developed real-time data pipeline projects using Python and Kafka, built ETL workflows for data processing, created backend applications with database integration, and designed a responsive portfolio website using React and TypeScript.
             </p>
           </div>
         </div>

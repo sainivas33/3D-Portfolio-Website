@@ -11,31 +11,31 @@ const Contact = () => {
             <h4>Connect</h4>
             <p>
               <a
-                href="https://www.linkedin.com/in/shriyash-soni"
+                href="https://www.linkedin.com/in/sainivas-katika-27021332a/"
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="disable"
               >
-                LinkedIn — shriyash-soni
+                LinkedIn — sainivas-katika
               </a>
             </p>
             <p>
               <a
-                href="mailto:sonishriyash@gmail.com"
+                href="mailto:sainivas33@gmail.com"
                 data-cursor="disable"
               >
-                Email — sonishriyash@gmail.com
+                Email — sainivas33@gmail.com
               </a>
             </p>
             <h4>Education</h4>
             <p>
-              Bachelor of Engineering (Computer Science - Data Science) | RGPV University, Jabalpur — Expected 2028
+              Bachelor of Computer Science - Data Science| Andhra University, Visakhapatnam —  2023
             </p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/shriyashsoni"
+              href="https://github.com/sainivas33"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -44,25 +44,16 @@ const Contact = () => {
               GitHub <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/shriyash-soni"
+              href="https://www.linkedin.com/in/sainivas-katika-27021332a/"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
               LinkedIn <MdArrowOutward />
-            </a>
+           </a>
             <a
-              href="https://x.com/shriyash_soni?t=8Mh_W6fG5hfabPzJNTW3lg&s=09"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Twitter / X <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com/sonishriyash"
+              href="https://www.instagram.com/sainivas____?igsh=MWpuMGN4dHl0Y2I2Yw=="
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -73,7 +64,6 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Shriyash Soni</span>
             </h2>
             <h5>
               <MdCopyright /> 2026
