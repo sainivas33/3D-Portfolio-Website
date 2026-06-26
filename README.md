@@ -4,7 +4,7 @@ This repository contains the source code for a personal 3D portfolio built with 
 
 Live site: https://sainivas-portfolio.vercel.app/
 
-![Portfolio Preview](public/Preview1.png)
+![Portfolio Preview](public/images/preview1.png)
 
 ## Table of Contents
 
